@@ -22,15 +22,16 @@ int main() {
 	tcp::socket socket{io};
 	socket.connect(tcp::endpoint(ip::address_v4::from_string("127.0.0.1"), Message::port));
 
-	string buf;
+	
 	Message message;
 	while (true) {
+		string buf = string();
 		cout << "Input message >> ";
 		if (getline(cin, buf); cin.eof())
 			break;
 
 		message.sent = system_clock::now();
-		message.message = move(buf);
+		message.message = (buf);
 
 		message.message += '\n';
 
