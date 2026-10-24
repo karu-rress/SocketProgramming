@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include <boost/asio.hpp>
 
 void handle_read(const boost::system::error_code &error, std::size_t bytes_transferred, std::shared_ptr<boost::asio::ip::tcp::socket> socket, std::vector<char> &buffer) {
@@ -49,7 +50,7 @@ void start_server(boost::asio::io_context &io_context, unsigned short port) {
         else {
             std::cerr << "Error in accepting connection: " << error.message() << std::endl;
         }
-        });
+    });
 
     // Run the IO service
     io_context.run();
@@ -90,7 +91,7 @@ int main() {
         // Start the server in a separate thread
         std::thread server_thread([&io_context, port]() {
             start_server(io_context, port);
-            });
+        });
 
         // Start the client
         start_client(io_context, "127.0.0.1", port);
